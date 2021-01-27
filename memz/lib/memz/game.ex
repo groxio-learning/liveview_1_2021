@@ -22,4 +22,18 @@ defmodule Memz.Game do
   defp substitute(char, false), do: char
 
 
+  def erase(%{plan: [current | plan], paragraph: paragraph} = game) do
+    new_paragraph = paragraph
+                    |> String.to_charlist()
+                    |> Enum.with_index(1)
+                    |> Enum.map(fn({char, index}) ->
+                      replace_character(index in current, char)
+                    end)
+                    |> List.to_string()
+
+    %{game | plan: plan, paragraph: new_paragraph}
+  end
+
+  def replace_character(true, _char), do: '_'
+  def replace_character(false, char), do: char
 end
