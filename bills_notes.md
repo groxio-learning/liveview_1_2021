@@ -3,10 +3,10 @@
 ## Lesson 1: Constructor, Reducer, Converter
 
 ```
-# constructor 
+# constructor
 "turtle"
 # function (converter) takes something and returns something else
-to_string 
+to_string
 # reducer
 # input |> constructor |> reducer (handlers)         |> converter
 :turtle |> to_string   |> Kernel.<>(", mutant ninja") |> String.length
@@ -35,21 +35,27 @@ i
 
 ## new phoenix live project (memory)
 ```
-mix phx.new memz --live 
+mix phx.new memz --live
 cd memz
 
-Then configure your database in config/dev.exs and run:
-
-    $ mix ecto.create
-
-Start your Phoenix app with:
-
-    $ mix phx.server
-
-You can also run your app inside IEx (Interactive Elixir) as:
-
-    $ iex -S mix phx.server
+# first time
 cd assets
 npm install
 cd ..
+mix deps.get
+mix ecto.create
+
+# start app
+mix phx.server
+
+# or better for dev:
+iex -S mix phx.server
+```
+
+## git management
+
+```
+git pull upstream main
+git push
+
 ```
