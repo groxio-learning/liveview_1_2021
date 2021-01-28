@@ -18,8 +18,7 @@ defmodule MemzWeb.EraserComponent do
     <h2>
      Memorize text in <%= @game.steps_total %> steps
     </h2>
-    <button phx-click="erase" phx-target="<%= @myself %>">
-
+    <button phx-click="erase" phx-target="<%= @myself %>">=
       Erase
     </button>
     """
