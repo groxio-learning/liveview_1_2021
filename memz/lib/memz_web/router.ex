@@ -19,6 +19,7 @@ defmodule MemzWeb.Router do
 
     live "/", PageLive, :index
     live "/counter", CounterLive
+    live "/game", GameLive
   end
 
   # Other scopes may use custom stacks.
