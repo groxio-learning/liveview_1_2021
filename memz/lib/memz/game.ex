@@ -1,12 +1,12 @@
 defmodule Memz.Game do
   defstruct steps_total: 4, plan: [], paragraph: ""
 
-  def new(steps, paragraph) do
+  def new(steps, paragraph, options \\ %{}) do
     chunk = ceil(String.length(paragraph) / steps)
-
+    shuffle_fn = options[:shuffle_fn] || &Enum.shuffle/1
     plan =
       1..String.length(paragraph)
-      |> Enum.shuffle()
+      |> shuffle_fn.()
       |> Enum.chunk_every(chunk)
 
     %__MODULE__{paragraph: paragraph, plan: plan}
