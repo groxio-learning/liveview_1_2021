@@ -2,9 +2,9 @@ defmodule MemzWeb.EraserComponent do
   use Phoenix.LiveComponent
   alias Memz.Game
 
-  def mount(socket) do
-    steps_total = 4
-    paragraph = "Did your try turning it off and on again?"
+  def update(assigns, socket) do
+    steps_total = assigns.passage.steps
+    paragraph = assigns.passage.text
 
     {:ok,
      assign(socket,

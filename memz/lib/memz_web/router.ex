@@ -19,12 +19,12 @@ defmodule MemzWeb.Router do
 
     live "/", PageLive, :index
     live "/counter", CounterLive
-    live "/game", GameLive
+
+    live "/game/:name", GameLive
 
     live "/passages", PassageLive.Index, :index
     live "/passages/new", PassageLive.Index, :new
     live "/passages/:id/edit", PassageLive.Index, :edit
-
     live "/passages/:id", PassageLive.Show, :show
     live "/passages/:id/show/edit", PassageLive.Show, :edit
   end
