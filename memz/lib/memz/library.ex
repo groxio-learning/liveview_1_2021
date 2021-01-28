@@ -4,9 +4,16 @@ defmodule Memz.Library do
   """
 
   import Ecto.Query, warn: false
-  alias Memz.Repo
 
   alias Memz.Library.Passage
+  alias Memz.Library.Passage.Query
+  alias Memz.Repo
+
+  def find_passage_by_name(name) do
+    Query.all
+    |> Query.find_by_name(name)
+    |> Repo.one()
+  end
 
   @doc """
   Returns the list of passages.
