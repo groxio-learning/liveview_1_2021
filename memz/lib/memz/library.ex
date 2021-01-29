@@ -10,7 +10,7 @@ defmodule Memz.Library do
   alias Memz.Repo
 
   def find_passage_by_name(name) do
-    Query.all
+    Query.all()
     |> Query.find_by_name(name)
     |> Repo.one()
   end
@@ -25,9 +25,18 @@ defmodule Memz.Library do
 
   """
   def list_passages do
-    Repo.all(Passage)
+    Query.all()
+    |> Repo.all()
   end
 
+  def passage_names do
+    Query.all()
+    |> Query.order_by_id()
+    |> Query.select_name()
+    |> Repo.all()
+  end
+
+  @spec get_passage!(any) :: any
   @doc """
   Gets a single passage.
 

@@ -9,4 +9,12 @@ defmodule Memz.Library.Passage.Query do
   def find_by_name(query, name) do
     from(p in query, where: p.name == ^name, limit: 1)
   end
+
+  def select_name(query) do
+    from(p in query, select: p.name)
+  end
+
+  def order_by_id(query) do
+    from(p in query, order_by: p.id)
+  end
 end
