@@ -3,12 +3,13 @@ defmodule MemzWeb.PickerLive do
 
   alias Memz.Library
 
-  @passage_names ["it_crowd", "ghandi", "star_treck", "terminator", "moana", "bible"]
-
   def mount(_params, _session, socket) do
+    passage_names = Library.passage_names()
+
     {
       :ok,
       socket
+      |> assign(:all, passage_names)
       |> start_from_beginning()
       |> passage_lookup()
     }
@@ -18,8 +19,12 @@ defmodule MemzWeb.PickerLive do
     ~L"""
     <h1> Welcome</h1>
     <h2><%= @current_name %></h2>
+    <pre><%= @passage.text %></pre>
     <button phx-click="next">
       Next Passage
+    </button>
+    <button phx-click="choose">
+      Choose
     </button>
     """
   end
@@ -31,6 +36,10 @@ defmodule MemzWeb.PickerLive do
       |> next_passage()
       |> passage_lookup()
     }
+  end
+
+  def handle_event("choose", _, socket) do
+    {:noreply, push_redirect(socket, to: "/game/play/#{socket.assigns.current_name}")}
   end
 
   defp next_passage(socket) do
@@ -48,12 +57,10 @@ defmodule MemzWeb.PickerLive do
   end
 
   defp start_from_beginning(socket) do
-    passage_names = @passage_names
-    [first | rest] = passage_names
+    [first | rest] = socket.assigns.all
     assign(socket,
               current_name: first,
-              passage_names: rest,
-              all: passage_names
+              passage_names: rest
             )
   end
 end
